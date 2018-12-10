@@ -20,14 +20,18 @@ public class TimerTest implements Runnable {
 
     public static void main(String[] args) {
         Random x = new Random();
-        int sum = 0;
+        int sum = 0, delay = 0;
         TimerTest timerTest = new TimerTest();
         Thread thread = new Thread(timerTest);
         thread.start();
         for (int i = 1; i <= 100; i++) {
             System.out.println(i);
             try {
-                int delay = 100 + x.nextInt(800);
+                if (5000 - sum < 900) {
+                    delay = x.nextInt(5000 - sum);
+                }else {
+                    delay = 100 + x.nextInt(800);
+                }
                 sum += delay;
                 System.out.println("Delay time: " + sum);
                 Thread.sleep(delay);
