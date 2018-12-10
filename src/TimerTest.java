@@ -27,11 +27,7 @@ public class TimerTest implements Runnable {
         for (int i = 1; i <= 100; i++) {
             System.out.println(i);
             try {
-                if (5000 - sum < 900) {
-                    delay = x.nextInt(5000 - sum);
-                }else {
-                    delay = 100 + x.nextInt(800);
-                }
+                delay = 100 + x.nextInt(800);
                 sum += delay;
                 System.out.println("Delay time: " + sum);
                 Thread.sleep(delay);
