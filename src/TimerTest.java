@@ -4,9 +4,12 @@ import java.util.TimerTask;
 
 public class TimerTest implements Runnable {
     Timer timer;
+    int sum = 0, delay = 0;
+
     @Override
     public void run() {
         timer = new Timer();
+        Random x = new Random();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -15,15 +18,6 @@ public class TimerTest implements Runnable {
                 timer = null;
             }
         }, 5000);
-
-    }
-
-    public static void main(String[] args) {
-        Random x = new Random();
-        int sum = 0, delay = 0;
-        TimerTest timerTest = new TimerTest();
-        Thread thread = new Thread(timerTest);
-        thread.start();
         for (int i = 1; i <= 100; i++) {
             System.out.println(i);
             try {
@@ -34,9 +28,17 @@ public class TimerTest implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (timerTest.timer == null){
+            if (timer == null){
                 break;
             }
         }
+
+    }
+
+    public static void main(String[] args) {
+        TimerTest timerTest = new TimerTest();
+        Thread thread = new Thread(timerTest);
+        thread.start();
+
     }
 }
